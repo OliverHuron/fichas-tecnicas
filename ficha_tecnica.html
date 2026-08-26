@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    .a4-size {
+      width: 210mm; /* Ancho de una hoja A4 */
+      height: 270mm; /* Alto de una hoja A4 */
+      max-width: 800px; /* Máximo ancho para pantalla */
+      max-height: 1131px; /* Máximo alto para pantalla */
+      margin: 20px auto; /* Centrar en la página */
+      position: relative;
+      background-color: white;
+      z-index: 0;
+      border: 1px solid #ccc; /* Borde para visualizar mejor */
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .a4-size::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url('image001.jpg'); /* Ruta de tu imagen */
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain; /* Ajusta la imagen al contenedor */
+      opacity: 1; /* Aumentamos la opacidad para que sea más visible */
+      z-index: -1;
+    }
+    .facultad {
+      position: relative;
+      z-index: 1; /* Asegura que el contenido esté encima de la marca de agua */
+      text-align: center;
+      padding: 20px;
+    }
+    .facultad h1 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      text-align: right;
+      transform: translateY(40px);
+      color: #002061;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      line-height: 0.7;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .facultad p {
+      font-size: 16px;
+      color: #333;
+    }
+    .humanista {
+      position: relative;
+      z-index: 1; /* Asegura que el contenido esté encima de la marca de agua */
+      text-align: center;
+      padding: 20px;
+    }
+    .humanista h1 {
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 60px;
+      align-items: center;
+      text-align: center;
+      color: #002061;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      line-height: 0.7;
+      font-family: 'Arial', sans-serif;
+    }
+    .fecha-envio-container {
+      display: flex;
+      align-items: flex-start;
+      margin: 10px 0;
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 1;
+      justify-content: flex-end;
+    }
+
+    .fecha-envio-label {
+      color: #808080;
+      font-size: 11px;
+      font-family: Arial, sans-serif;
+      margin-right: 5px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .fecha-envio {
+      width: 50%;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+    }
+    
+    .fecha-envio td {
+      border: 0.5px solid #888;
+      padding: 15px 8px;
+      font-size: 10px;
+      color: #333;
+      background-color: white;
+    }
+    
+    .form-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 5px 0;
+      font-size: 10px;
+      font-family: Arial, sans-serif;
+    }
+
+    .form-table td {
+      border: 0.5px solid #888;
+      padding: 5px 8px 20px 8px;
+      vertical-align: top;
+      text-align: left;
+      line-height: 1.2;
+    }
+
+    .field-label {
+      width: 30%;
+      font-size: 12px;
+      color: #808080;
+      font-family: Century Gothic, sans-serif;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .field-value {
+      width: 70%;
+      font-size: 12px;
+      color: #808080;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .field-value-centered {
+      width: 70%;
+      font-size: 11px;
+      color: #808080;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    /* Clases para filas con 4 columnas */
+    .field-label-4col {
+      width: 25%;
+      font-size: 11px;
+      color: #808080;
+      font-family: Century Gothic, sans-serif;
+      padding: 0 8px 10px 8px !important;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .field-value-empty {
+      width: 30%;
+      font-size: 11px;
+      color: #808080;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .hour-label-small {
+      width: 7%;
+      font-size: 11px;
+      color: #808080;
+      text-align: center;
+      vertical-align: middle;
+      padding: 15px 8px 15px 8px !important;
+    }
+
+    .hour-value-large {
+      width: 38%;
+      font-size: 11px;
+      color: #808080;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .center-text {
+      text-align: center;
+      font-weight: bold;
+      color: #5a7db8;
+      margin: 10px 0 5px 0;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="a4-size">
+    <div class="facultad">
+      <h1>Facultad de Contaduría y </h1>
+      <h1>Ciencias Administrativas</h1>
+    </div>
+    <div class="humanista">
+      <h1>"Humanista Por Siempre"</h1>
+    </div>
+    
+    <div class="fecha-envio-container">
+      <div class="fecha-envio-label">Fecha de envío:</div>
+      <table class="fecha-envio">
+        <tr>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+
+    <table class="form-table">
+      <tr>
+        <td class="field-label">Nombre de la Coordinación</td>
+        <td class="field-value" colspan="3"></td>
+      </tr>
+      <tr>
+        <td class="field-label">Nombre del Coordinador</td>
+        <td class="field-value" colspan="3"></td>
+      </tr>
+      <tr>
+        <td class="field-label">Nombre del evento o Actividad</td>
+        <td class="field-value" colspan="3"></td>
+      </tr>
+      <tr>
+        <td class="field-label-4col" style="white-space: pre-wrap;">
+          Fecha del evento
+           (Marca con X)
+        Fija ( ) Propuesta ( )</td>
+        <td class="field-value-empty"></td>
+        <td class="hour-label-small">Hora:</td>
+        <td class="hour-value-large"></td>
+      </tr>
+      <tr>
+        <td class="field-label-4col" style="white-space: pre-wrap;">Indicar si se requiere montaje anticipado.
+
+        </td>
+        <td class="field-value-empty"></td>
+        <td class="hour-label-small">Hora:</td>
+        <td class="hour-value-large"></td>
+      </tr>
+      <tr>
+        <td class="field-label">Lugar</td>
+        <td class="field-value" colspan="3"></td>
+      </tr>
+      <tr>
+        <td class="field-label">Domicilio completo donde se piensa desarrollar el evento</td>
+        <td class="field-value" colspan="3"></td>
+      </tr>
+      <tr>
+        <td class="field-label">Duración estimada</td>
+        <td class="field-value" colspan="3"></td>
+      </tr>
+      <tr>
+        <td class="field-label">Responsable, contacto o enlace del evento (nombre, cargo y teléfono)</td>
+        <td class="field-value" colspan="3"></td>
+      </tr>
+      <tr>
+        <td class="field-label">Participantes asistentes o destinatario y/o público al que va dirigido</td>
+        <td class="field-value" colspan="3"></td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+name: Deploy siaf-fichatecnica
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, siaf]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync files to deploy directory
+        run: |
+          rsync -av --delete \
+            --exclude '.git' \
+            --exclude 'server/node_modules' \
+            --exclude 'client/node_modules' \
+            --exclude 'server/.env' \
+            ./ /var/www/siaf-fichatecnica/
+          sudo chown -R oliver:oliver /var/www/siaf-fichatecnica
+
+      - name: Restore production .env
+        run: cp /var/www/.env.siaf-fichatecnica /var/www/siaf-fichatecnica/server/.env
+
+      - name: Install & migrate server
+        working-directory: /var/www/siaf-fichatecnica/server
+        run: |
+          npm install --omit=dev
+          npm run migrate
+
+      - name: Install & build client
+        working-directory: /var/www/siaf-fichatecnica/client
+        run: |
+          npm install
+          npm run build
+
+      - name: Restart with PM2
+        working-directory: /var/www/siaf-fichatecnica/server
+        run: |
+          pm2 describe siaf-fichatecnica > /dev/null 2>&1 \
+            && pm2 restart siaf-fichatecnica \
+            || pm2 start src/index.js --name siaf-fichatecnica
+          pm2 save

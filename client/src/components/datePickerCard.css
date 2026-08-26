@@ -1,0 +1,150 @@
+.date-card {
+  border: 1px solid var(--gris-borde);
+  border-radius: 10px;
+  padding: 14px;
+  background: #fafbfc;
+  max-width: 300px;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.date-card-disabled {
+  background: var(--gris-fondo);
+  opacity: 0.55;
+}
+
+.date-card-disabled .date-cell,
+.date-card-disabled .date-card-header button {
+  cursor: not-allowed;
+}
+
+.date-card-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gris-texto);
+  margin-bottom: 10px;
+}
+
+.date-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--azul);
+  margin-bottom: 8px;
+  text-transform: capitalize;
+  min-width: 0;
+}
+
+.date-card-header button {
+  flex-shrink: 0;
+}
+
+.date-card-header button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gris-borde);
+  background: white;
+  border-radius: 6px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: var(--azul);
+}
+
+.date-card-header button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.date-card-header button:hover {
+  background: var(--gris-fondo);
+}
+
+.date-card-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gris-texto);
+  text-align: center;
+  margin-bottom: 4px;
+  min-width: 0;
+}
+
+.date-card-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 2px;
+  min-width: 0;
+}
+
+.date-cell {
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 34px;
+  max-height: 34px;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--texto);
+  box-sizing: border-box;
+}
+
+.date-cell:hover {
+  background: var(--gris-borde);
+}
+
+.date-cell.selected {
+  background: var(--azul);
+  color: white;
+  font-weight: 700;
+}
+
+.date-cell.empty {
+  cursor: default;
+  pointer-events: none;
+}
+
+.date-card-selected {
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--gris-texto);
+  min-height: 14px;
+}
+
+.date-card-time {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--gris-borde);
+  min-width: 0;
+}
+
+.date-card-time label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gris-texto);
+}
+
+.date-card-time input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--gris-borde);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 13px;
+  font-family: inherit;
+  box-sizing: border-box;
+}

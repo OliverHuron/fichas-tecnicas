@@ -1,0 +1,266 @@
+.ficha-a4 {
+  width: 210mm;
+  height: 270mm;
+  max-width: 800px;
+  max-height: 1131px;
+  margin: 20px auto;
+  position: relative;
+  background-color: white;
+  z-index: 0;
+  border: 1px solid #ccc;
+  padding: 20px 46px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.ficha-a4::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/image001.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 1;
+  z-index: -1;
+}
+
+.ficha-facultad {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 20px;
+}
+
+.ficha-facultad h1 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-align: right;
+  transform: translateY(40px);
+  color: #002061;
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 0.7;
+  font-family: Arial, sans-serif;
+}
+
+.ficha-humanista {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 20px;
+}
+
+.ficha-humanista h1 {
+  font-size: 12px;
+  font-weight: 800;
+  margin-top: 60px;
+  text-align: center;
+  color: #002061;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 0.7;
+  font-family: Arial, sans-serif;
+}
+
+.ficha-fecha-envio-container {
+  display: flex;
+  align-items: flex-start;
+  margin: 10px 0 25px;
+  position: relative;
+  z-index: 1;
+  justify-content: flex-end;
+}
+
+.ficha-fecha-envio-label {
+  color: #808080;
+  font-size: 11px;
+  font-family: Arial, sans-serif;
+  margin-right: 5px;
+}
+
+.ficha-fecha-envio {
+  width: 50%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.ficha-fecha-envio td {
+  border: 0.5px solid #bbb;
+  padding: 15px 8px;
+  font-size: 10px;
+  color: #333;
+  background-color: white;
+}
+
+.ficha-table {
+  width: 94%;
+  border-collapse: collapse;
+  margin: 5px auto;
+  font-size: 10px;
+  font-family: Arial, sans-serif;
+  position: relative;
+  z-index: 1;
+}
+
+/* Layout fijo con colgroup: solo la Hoja 2 lo usa, para poder darle a la fila
+   de la Rectora una proporción de columnas distinta (vía colSpan) sin que el
+   layout automático del navegador la iguale con el resto de las filas. */
+.ficha-table-fixed {
+  table-layout: fixed;
+}
+
+.ficha-table td {
+  border: 0.5px solid #bbb;
+  padding: 5px 8px 20px 8px;
+  vertical-align: top;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.ficha-label {
+  width: 30%;
+  font-size: 12px;
+  font-weight: normal;
+  color: #333;
+  font-family: 'Century Gothic', Arial, sans-serif;
+  vertical-align: top;
+}
+
+.ficha-value {
+  width: 70%;
+  font-size: 12px;
+  color: #333;
+  white-space: pre-wrap;
+  vertical-align: top;
+}
+
+.ficha-label-compact {
+  width: 25%;
+  font-size: 11px;
+  font-weight: normal;
+  color: #333;
+  font-family: 'Century Gothic', Arial, sans-serif;
+  padding: 0 8px 10px 8px !important;
+  vertical-align: top;
+}
+
+.ficha-value-compact {
+  width: 30%;
+  font-size: 11px;
+  color: #333;
+  vertical-align: top;
+}
+
+.ficha-hour-label {
+  width: 7%;
+  font-size: 11px;
+  color: #808080;
+  text-align: center;
+  vertical-align: middle;
+  padding: 15px 8px !important;
+}
+
+.ficha-hour-value {
+  width: 38%;
+  font-size: 11px;
+  color: #333;
+  vertical-align: top;
+}
+
+.ficha-hint {
+  color: #c00000;
+  font-size: 10px;
+}
+
+.ficha-checkbox-label {
+  width: 34%;
+  font-size: 12px;
+  font-weight: normal;
+  color: #333;
+  font-family: 'Century Gothic', Arial, sans-serif;
+  vertical-align: top;
+}
+
+.ficha-checkbox-value {
+  width: 66%;
+  font-size: 11px;
+  color: #333;
+  vertical-align: top;
+}
+
+.ficha-checkbox-value .ficha-coord-note {
+  margin-left: 6px;
+  color: #555;
+}
+
+.ficha-signature-block {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.ficha-signature-line {
+  display: inline-block;
+  border-top: 0.5px solid #333;
+  width: 260px;
+  padding-top: 4px;
+  font-size: 11px;
+}
+
+/* Mismo lugar/distancia en ambas hojas: anclado cerca del borde inferior
+   real de la página, sin importar qué tan larga sea la tabla de arriba. */
+.ficha-folio {
+  position: absolute;
+  left: 46px;
+  right: 46px;
+  bottom: 89px;
+  z-index: 1;
+  color: #c00000;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+@media print {
+  /* El margen que elige la persona en el diálogo de impresión (Ninguno,
+     Predeterminado, etc.) puede ignorar por completo el margen que pidamos
+     aquí vía @page, así que no dependemos de eso: forzamos página A4 sin
+     margen y hacemos que la ficha ocupe el alto real completo (297mm),
+     estirando el membrete para que llene el rectángulo sin bandas blancas
+     sin importar qué margen haya elegido la persona. */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .ficha-a4,
+  .ficha-a4::before {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .ficha-a4 {
+    border: none;
+    margin: 0 auto;
+    max-width: none;
+    max-height: none;
+    height: 297mm;
+    break-inside: avoid;
+  }
+
+  .ficha-a4::before {
+    background-size: 100% 100%;
+  }
+
+  .ficha-a4:not(:last-child) {
+    break-after: page;
+  }
+}

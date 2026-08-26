@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    .a4-size {
+      width: 210mm; /* Ancho de una hoja A4 */
+      height: 270mm; /* Alto de una hoja A4 */
+      max-width: 800px; /* Máximo ancho para pantalla */
+      max-height: 1131px; /* Máximo alto para pantalla */
+      margin: 20px auto; /* Centrar en la página */
+      position: relative;
+      background-color: white;
+      z-index: 0;
+      border: 1px solid #ccc; /* Borde para visualizar mejor */
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .a4-size::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url('image001.jpg'); /* Ruta de tu imagen */
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain; /* Ajusta la imagen al contenedor */
+      opacity: 1; /* Aumentamos la opacidad para que sea más visible */
+      z-index: -1;
+    }
+    .facultad {
+      position: relative;
+      z-index: 1; /* Asegura que el contenido esté encima de la marca de agua */
+      text-align: center;
+      padding: 20px;
+    }
+    .facultad h1 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      text-align: right;
+      transform: translateY(40px);
+      color: #002061;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      line-height: 0.7;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .facultad p {
+      font-size: 16px;
+      color: #333;
+    }
+    .humanista {
+      position: relative;
+      z-index: 1; /* Asegura que el contenido esté encima de la marca de agua */
+      text-align: center;
+      padding: 20px;
+    }
+    .humanista h1 {
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 60px;
+      align-items: center;
+      text-align: center;
+      color: #002061;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      line-height: 0.7;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .form-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 5px 0;
+      font-size: 10px;
+      font-family: Arial, sans-serif;
+    }
+
+    .form-table td {
+      border: 0.5px solid #888;
+      padding: 5px 8px 20px 8px;
+      vertical-align: top;
+      text-align: left;
+      line-height: 1.2;
+    }
+
+    .field-label {
+      width: 30%;
+      font-size: 12px;
+      color: #808080;
+      font-family: Century Gothic, sans-serif;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .field-value {
+      width: 70%;
+      font-size: 12px;
+      color: #808080;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .field-hint {
+      color: #c00000;
+    }
+
+    .checkbox-label {
+      width: 34%;
+      font-size: 12px;
+      color: #808080;
+      font-family: Century Gothic, sans-serif;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .checkbox-value {
+      width: 66%;
+      font-size: 11px;
+      color: #333;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .checkbox-value .coord-note {
+      display: block;
+      margin-top: 4px;
+    }
+
+    .signature-block {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .signature-line {
+      display: inline-block;
+      border-top: 0.5px solid #333;
+      width: 260px;
+      padding-top: 4px;
+      font-size: 10px;
+    }
+
+    .signature-highlight {
+      background-color: #ffff00;
+    }
+
+    .folio {
+      position: relative;
+      z-index: 1;
+      color: #c00000;
+      font-weight: bold;
+      font-size: 11px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="a4-size">
+    <div class="facultad">
+      <h1>Facultad de Contaduría y </h1>
+      <h1>Ciencias Administrativas</h1>
+    </div>
+    <div class="humanista">
+      <h1>"Humanista Por Siempre"</h1>
+    </div>
+
+    <table class="form-table">
+      <tr>
+        <td class="field-label">Objetivo de la actividad</td>
+        <td class="field-value"></td>
+      </tr>
+      <tr>
+        <td class="field-label">Autoridades invitadas (Grado Académico, Nombre y Cargo)</td>
+        <td class="field-value"></td>
+      </tr>
+      <tr>
+        <td class="field-label">Programa del evento o actividad</td>
+        <td class="field-value"></td>
+      </tr>
+      <tr>
+        <td class="field-label">Datos estadísticos <span class="field-hint">(Beneficiarios del evento o actividad)</span></td>
+        <td class="field-value"></td>
+      </tr>
+      <tr>
+        <td class="field-label">Información de contraste <span class="field-hint">(Información histórica del evento)</span></td>
+        <td class="field-value"></td>
+      </tr>
+      <tr>
+        <td class="field-label">Presupuesto estimado desglosado <span class="field-hint">(Agregar cotizaciones)</span></td>
+        <td class="field-value"></td>
+      </tr>
+      <tr>
+        <td class="checkbox-label">Se requiere Diseño Gráfico <span class="field-hint">(describir)</span></td>
+        <td class="checkbox-value">
+          SI ( &nbsp; ) &nbsp;&nbsp; NO ( &nbsp; )
+          <span class="coord-note">Si, Programar con la M.A. Alicia Contreras Lugo</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="checkbox-label">Se requiere Publicación en la Página y Redes Sociales <span class="field-hint">(describir)</span></td>
+        <td class="checkbox-value">
+          SI ( &nbsp; ) &nbsp;&nbsp; NO ( &nbsp; )
+          <span class="coord-note">Si, Programar con el I.S.C. Héctor Ulises Gaona Campos</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="checkbox-label">Se requiere Transmisión en vivo y/o grabación del evento <span class="field-hint">(describir)</span></td>
+        <td class="checkbox-value">
+          SI ( &nbsp; ) &nbsp;&nbsp; NO ( &nbsp; )
+          <span class="coord-note">Si, Programar con el L.C. y L.I.A. Aldo Flores Morales</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="checkbox-label">Se requiere Equipo Informático <span class="field-hint">(describir)</span></td>
+        <td class="checkbox-value">
+          SI ( &nbsp; ) &nbsp;&nbsp; NO ( &nbsp; )
+          <span class="coord-note">Si, Programar con el C.P. Iván Fernández Mandujano</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field-label" >¿La actividad deriva de un compromiso de la Rectora?</td>
+        <td class="field-value">SI ( &nbsp; ) &nbsp;&nbsp; NO ( &nbsp; )</td>
+      </tr>
+    </table>
+
+    <div class="signature-block">
+      <span class="signature-line signature-highlight">nombre y cargo</span>
+    </div>
+
+    <div class="folio">Folio de Control Interno:</div>
+  </div>
+</body>
+</html>
