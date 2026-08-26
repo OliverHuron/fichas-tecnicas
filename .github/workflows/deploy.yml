@@ -1,45 +1,61 @@
-name: Deploy siaf-fichatecnica
+name: Deploy a Producción — SIAF Fichas Técnicas
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   deploy:
-    runs-on: [self-hosted, siaf]
+    runs-on: self-hosted
     steps:
-      - name: Checkout
+      - name: Descargar código
         uses: actions/checkout@v4
 
-      - name: Sync files to deploy directory
+      - name: Asegurar permisos
+        run: |
+          sudo chown -R oliver:oliver /var/www/siaf-fichatecnica || true
+
+      - name: Desplegar archivos con rsync
         run: |
           rsync -av --delete \
-            --exclude '.git' \
-            --exclude 'server/node_modules' \
-            --exclude 'client/node_modules' \
-            --exclude 'server/.env' \
-            ./ /var/www/siaf-fichatecnica/
-          sudo chown -R oliver:oliver /var/www/siaf-fichatecnica
+            --exclude='.git' \
+            --exclude='.env' \
+            --exclude='node_modules' \
+            --exclude='server/node_modules' \
+            --exclude='client/node_modules' \
+            . /var/www/siaf-fichatecnica/
 
-      - name: Restore production .env
-        run: cp /var/www/.env.siaf-fichatecnica /var/www/siaf-fichatecnica/server/.env
-
-      - name: Install & migrate server
-        working-directory: /var/www/siaf-fichatecnica/server
+      - name: Instalar dependencias del servidor
         run: |
+          cd /var/www/siaf-fichatecnica/server
           npm install --omit=dev
-          npm run migrate
 
-      - name: Install & build client
-        working-directory: /var/www/siaf-fichatecnica/client
+      - name: Construir Frontend (Client)
         run: |
+          cd /var/www/siaf-fichatecnica/client
           npm install
           npm run build
 
-      - name: Restart with PM2
-        working-directory: /var/www/siaf-fichatecnica/server
+      - name: Restaurar .env desde backup (si no existe)
         run: |
-          pm2 describe siaf-fichatecnica > /dev/null 2>&1 \
-            && pm2 restart siaf-fichatecnica \
-            || pm2 start src/index.js --name siaf-fichatecnica
+          if [ ! -f /var/www/siaf-fichatecnica/server/.env ]; then
+            cp /var/www/.env.siaf-fichatecnica /var/www/siaf-fichatecnica/server/.env
+            echo "⚠️ .env restaurado desde backup"
+          fi
+
+      - name: Ejecutar migraciones pendientes
+        run: |
+          cd /var/www/siaf-fichatecnica/server
+          npm run migrate
+
+      - name: Permisos Nginx
+        run: |
+          sudo chown -R www-data:www-data /var/www/siaf-fichatecnica/client/dist
+
+      - name: Reiniciar servidor con PM2
+        run: |
+          cd /var/www/siaf-fichatecnica/server
+          pm2 restart siaf-fichatecnica --update-env || pm2 start src/index.js --name siaf-fichatecnica
           pm2 save
+          echo "🚀 Despliegue finalizado con éxito"
