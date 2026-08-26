@@ -37,15 +37,14 @@ export default function LoginPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'var(--azul)',
+        backgroundImage: 'linear-gradient(rgba(0, 32, 97, 0.8), rgba(0, 32, 97, 0.8)), url(/fondo_login.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
     >
       <form onSubmit={handleSubmit} className="card" style={{ width: 360 }}>
         <div style={{ textAlign: 'center', marginBottom: 22 }}>
           <img src="/umsnh_logo.png" alt="UMSNH" style={{ maxWidth: 220 }} />
-          <div style={{ fontSize: 11, color: 'var(--dorado)', marginTop: 10, letterSpacing: '0.04em', fontWeight: 700 }}>
-            FICHAS TÉCNICAS
-          </div>
         </div>
 
         {error && <div className="alert alert-error">{error}</div>}
